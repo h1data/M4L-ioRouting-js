@@ -31,4 +31,4 @@ Each live.menu objects connected to js has to be set attributes below;<br>
 
 #### Miscellaneous
 - This script use unofficial attributes for live.menu. The author does not own any responsibilities for using the script.
-- Undoing a series of changes for MIDI input type or channel may cause extra revert for pulldown lists. (issue #1)
+- Undoing a series of changes for MIDI input type or channel may cause extra revert for pulldown lists. (issue [#1](https://github.com/h1data/M4L-ioRouting-js/issues/1))
