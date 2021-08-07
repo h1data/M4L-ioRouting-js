@@ -30,4 +30,5 @@ Each live.menu objects connected to js has to be set attributes below;<br>
 - Initial Enable -> false
 
 #### Miscellaneous
-- This script use unofficial attributes for live.menu.
+- This script use unofficial attributes for live.menu. The author does not own any responsibilities for using the script.
+- Undoing a series of changes for MIDI input type or channel may cause extra revert for pulldown lists. (issue #1)
