@@ -41,13 +41,26 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"comment" : "",
+					"id" : "obj-1",
+					"index" : 0,
+					"maxclass" : "inlet",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 23.0, 12.0, 30.0, 30.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"comment" : "",
 					"id" : "obj-8",
 					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1.0, 88.0, 30.0, 30.0 ]
+					"patching_rect" : [ 257.0, 89.0, 30.0, 30.0 ]
 				}
 
 			}
@@ -58,7 +71,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 152.0, 172.0, 83.0, 22.0 ],
+					"patching_rect" : [ 121.0, 178.0, 83.0, 22.0 ],
 					"text" : "setchannel $1"
 				}
 
@@ -70,20 +83,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 54.0, 172.0, 64.0, 22.0 ],
+					"patching_rect" : [ 23.0, 178.0, 64.0, 22.0 ],
 					"text" : "settype $1"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-5",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "bang", "int", "int" ],
-					"patching_rect" : [ 54.0, 10.0, 83.0, 22.0 ],
-					"text" : "live.thisdevice"
 				}
 
 			}
@@ -92,9 +93,9 @@
 					"id" : "obj-7",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 54.0, 99.0, 117.0, 22.0 ],
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 23.0, 105.0, 165.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"filename" : "ioRouting.js",
 						"parameter_enable" : 0
@@ -111,7 +112,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 54.0, 53.0, 29.5, 22.0 ],
+					"patching_rect" : [ 23.0, 59.0, 29.5, 22.0 ],
 					"text" : "init"
 				}
 
@@ -125,7 +126,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "float" ],
 					"parameter_enable" : 1,
-					"patching_rect" : [ 152.0, 136.0, 89.0, 15.0 ],
+					"patching_rect" : [ 121.0, 142.0, 89.0, 15.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 0.0, 16.0, 89.0, 15.0 ],
 					"saved_attribute_attributes" : 					{
@@ -155,7 +156,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "float" ],
 					"parameter_enable" : 1,
-					"patching_rect" : [ 54.0, 136.0, 89.0, 15.0 ],
+					"patching_rect" : [ 23.0, 142.0, 89.0, 15.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 0.0, 0.0, 89.0, 15.0 ],
 					"saved_attribute_attributes" : 					{
@@ -179,8 +180,15 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
+					"destination" : [ "obj-6", 0 ],
+					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-7", 0 ],
-					"midpoints" : [ 63.5, 208.0, 39.5, 208.0, 39.5, 88.0, 63.5, 88.0 ],
+					"midpoints" : [ 32.5, 214.0, 8.5, 214.0, 8.5, 94.0, 32.5, 94.0 ],
 					"source" : [ "obj-18", 0 ]
 				}
 
@@ -188,7 +196,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-7", 0 ],
-					"midpoints" : [ 161.5, 207.0, 258.5, 207.0, 258.5, 88.0, 63.5, 88.0 ],
+					"midpoints" : [ 130.5, 213.0, 227.5, 213.0, 227.5, 94.0, 32.5, 94.0 ],
 					"source" : [ "obj-19", 0 ]
 				}
 
@@ -209,13 +217,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-6", 0 ],
-					"source" : [ "obj-5", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-7", 0 ],
 					"source" : [ "obj-6", 0 ]
 				}
@@ -230,8 +231,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-4", 0 ],
+					"source" : [ "obj-7", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-3", 0 ],
-					"midpoints" : [ 10.5, 126.5, 63.5, 126.5 ],
+					"midpoints" : [ 266.5, 132.5, 32.5, 132.5 ],
 					"order" : 1,
 					"source" : [ "obj-8", 0 ]
 				}
@@ -240,7 +248,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-4", 0 ],
-					"midpoints" : [ 10.5, 126.5, 161.5, 126.5 ],
+					"midpoints" : [ 266.5, 132.5, 130.5, 132.5 ],
 					"order" : 0,
 					"source" : [ "obj-8", 0 ]
 				}
@@ -257,7 +265,14 @@
 			"inherited_shortname" : 1
 		}
 ,
-		"dependency_cache" : [  ],
+		"dependency_cache" : [ 			{
+				"name" : "ioRouting.js",
+				"bootpath" : "~/Documents/Max 8/Max for Live Devices/ioRoutingSample Project/code",
+				"patcherrelativepath" : "../code",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+ ],
 		"autosave" : 0
 	}
 
