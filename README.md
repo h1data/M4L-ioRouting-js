@@ -2,7 +2,7 @@
 A script for MIDI/AUDIO routing in Max for Live devices.
 
 ### Usage
-Check sample devices for further details.
+Check [sample](https://github.com/h1data/M4L-ioRouting-js/tree/main/sample) device for further details.
 
 #### Arguments of js object
 > js ioRoutings.js *io-type* [*channel-offset*]
