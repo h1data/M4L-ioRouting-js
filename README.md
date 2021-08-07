@@ -18,7 +18,7 @@ number of channel pairs (zero-based counting)
     Arguments: channel-number [int]<br>
     Changes the routing channel by number of lists. (zero-based counting)
 - settype<br>
-    Arguments type-number [int]<br>
+    Arguments: type-number [int]<br>
     Changes the routing type by number of lists. (zero-based counting)
 
 #### Output
