@@ -20,6 +20,11 @@ number of channel pairs (zero-based counting)
 - settype<br>
     Arguments: type-number [int]<br>
     Changes the routing type by number of lists. (zero-based counting)
+- routethistrack<br>
+    Change routing to the MIDI track the device belongs to. (only works with MIDI input)<br>
+    Arguments: force routing [int]<br>
+        With 1, works to whichever the routing was selected.<br>
+        Without 1 or not specified, works only when the routing was selected to "No Input".
 
 #### Output
 - Out left outlet: Messages for live.menu objects; selector for the routing type (track or external device).
