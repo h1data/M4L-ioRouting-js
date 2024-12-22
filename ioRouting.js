@@ -5,9 +5,9 @@
  * @author h1data
  * @version 1.1.0 January 3, 2022
  * 
- * @arguments js ioRoutingLiveMenu.js ioType [channelOffset]
+ * @arguments js ioRouting.js ioType [channelOffset]
  * @argument {string} ioType midi_inputs, midi_outputs, audio_inputs, or audio_outputs
- * @argument {int} channelOffset (optional) channel number in multiple channel pairs (zero-based counting)
+ * @argument {number} channelOffset (optional) channel number in multiple channel pairs (zero-based counting)
  */
 
 autowatch = 1;
@@ -49,8 +49,9 @@ callbackTypes.local = 1;
 /**
  * Change live.menu list with available routing types.
  * Triggered by callback from LiveAPI. (available_routing_types)
- * @param {Object} arg ['id', (int)] or
- * ['available_routing_types', {'available_routing_types', [{'display_name': (string), 'identifier': (int)}, ...]}]
+ * @private
+ * @param {Array} arg ['id', (number)] or
+ * ['available_routing_types', {'available_routing_types', [{'display_name': (string), 'identifier': (number)}, ...]}]
  */
 function callbackTypes(arg) {
   if (arg[1].available_routing_types != undefined) {
@@ -66,8 +67,9 @@ callbackChannels.local = 1;
 /**
  * Change live.menu list with available routing channels.
  * Triggered by callback from LiveAPI. (available_routing_channels)
- * @param {Object} arg ['id', (int)] or
- * ['available_routing_channels', {'available_routing_channels': [{'display_name': (string), 'identifier': (int)}, ...]}]
+ * @private
+ * @param {Array} arg ['id', (number)] or
+ * ['available_routing_channels', {'available_routing_channels': [{'display_name': (string), 'identifier': (number)}, ...]}]
  */
 function callbackChannels(arg) {
   if (arg[1].available_routing_channels != undefined) {
@@ -107,8 +109,9 @@ callbackRoutingType.local = 1;
 /**
  * select live.menu's item by current routing type
  * triggered by callback of LiveAPI (routing_type)
- * @param arg dictionary
- * ['id', (int)] or ['routing_type', {'routing_type': {'display_name': (string), 'identifier': (int)}}]
+ * @private
+ * @param arg dictionary of routing type within an Array
+ * ['id', (number)] or ['routing_type', {'routing_type': {'display_name': (string), 'identifier': (number)}}]
  */
 function callbackRoutingType(arg) {
   if (arg[1].routing_type != undefined) {
@@ -120,17 +123,19 @@ callbackRoutingChannel.local = 1;
 /**
  * select live.menu's item by current routing channel
  * triggered by callback of LiveAPI (routing_channel)
- * @param {Object} arg dictionary
- * ['id', (int)] or ['routing_channel', {'routing_channel', {'display_name': (string), 'identifier': (int)}}]
+ * @private
+ * @param {Array} arg dictionary of routing channel within an Array
+ * ['id', (number)] or ['routing_channel', {'routing_channel', {'display_name': (string), 'identifier': (number)}}]
  */
 function callbackRoutingChannel(arg) {
-  if (arg[1].routing_channel != undefined)
+  if (arg[1].routing_channel != undefined) {
     outlet(1, 'setsymbol', arg[1].routing_channel.display_name);
+  }
 }
 
 /**
  * change routing type
- * @param {int} id target item number of routing type list (zero-based counting)
+ * @param {number} id target item number of routing type list (zero-based counting)
  */
 function settype(id) {
   var mapTypes = JSON.parse(lomTypes.get('available_routing_types')).available_routing_types;
@@ -143,7 +148,7 @@ function settype(id) {
 
 /**
  * change routing channel
- * @param {int} id target item number of routing channel list (zero-based counting)
+ * @param {number} id target item number of routing channel list (zero-based counting)
  */
 function setchannel(id) {
   var mapChannels = lomChannels.get('available_routing_channels');
@@ -157,7 +162,7 @@ function setchannel(id) {
 
 /**
  * Automatically route MIDI input to MIDI track where the device belong to.
- * @param {int} forceRouting 1: force to change routing, not 1: change routing when the input is selected to 'No Input'
+ * @param {number} forceRouting 1: force to change routing, not 1: change routing when the input is selected to 'No Input'
  */
 function routethistrack(forceRouting) {
   if (!isInitialized || jsarguments[1] != 'midi_inputs') return;
