@@ -3,7 +3,8 @@
  * 
  * @description manage live.menu objects to select Audio/MIDI IO routing for Max for Live devices
  * @author h1data
- * @version 1.1.0 January 3, 2022
+ * @version 1.1.1 December 26, 2024
+ * @since 2021
  * 
  * @arguments js ioRouting.js ioType [channelOffset]
  * @argument {string} ioType midi_inputs, midi_outputs, audio_inputs, or audio_outputs
@@ -27,7 +28,7 @@ var isInitialized = false;
  */ 
 function init() {
   if (jsarguments.length < 2 || jsarguments.length > 3) {
-    error('invalid number of arguments. usage:', jsarguments[0], 'ioType(i.e. midi_inputs) [channelOffset]\n');
+    error('invalid number of arguments. usage:', jsarguments[0], 'ioType (i.e. midi_inputs) [channelOffset]\n');
     return;
   }
   var channelOffset = 0;
@@ -114,7 +115,8 @@ callbackRoutingType.local = 1;
  * ['id', (number)] or ['routing_type', {'routing_type': {'display_name': (string), 'identifier': (number)}}]
  */
 function callbackRoutingType(arg) {
-  if (arg[1].routing_type != undefined) {
+  // only accepts when 'routing_type'
+  if (arg[1].routing_type !== undefined) {
     outlet(0, 'setsymbol', arg[1].routing_type.display_name);
   }
 }
@@ -128,7 +130,8 @@ callbackRoutingChannel.local = 1;
  * ['id', (number)] or ['routing_channel', {'routing_channel', {'display_name': (string), 'identifier': (number)}}]
  */
 function callbackRoutingChannel(arg) {
-  if (arg[1].routing_channel != undefined) {
+  // only accepts when 'routing_channel'
+  if (arg[1].routing_channel !== undefined) {
     outlet(1, 'setsymbol', arg[1].routing_channel.display_name);
   }
 }
@@ -138,11 +141,19 @@ function callbackRoutingChannel(arg) {
  * @param {number} id target item number of routing type list (zero-based counting)
  */
 function settype(id) {
+  if (!isInitialized) {
+    error('Called settype before init. Make sure to call init triggered by live.thisdevice and to set attributes of live.menu for routing types to the below.\nParameter Visibility -> hidden\nInitial Enable -> false\n');
+    return;
+  }
+  if ((typeof id !== 'number') || !isFinite(id)) {
+    error('Invalid argument for settype:', id, '\nMake sure to input from left outlet of live.menu (item index).');
+    return;
+  }
   var mapTypes = JSON.parse(lomTypes.get('available_routing_types')).available_routing_types;
   if (mapTypes[id] != undefined) {
     lomRoutingType.set('routing_type', mapTypes[id]);
   } else {
-    error('Invalid Input Type:', id);
+    error('Invalid Routing Type:', id, '\n');
   }
 }
 
@@ -151,12 +162,20 @@ function settype(id) {
  * @param {number} id target item number of routing channel list (zero-based counting)
  */
 function setchannel(id) {
+  if (!isInitialized) {
+    error('Called setchannel before init. Make sure to call init triggered by live.thisdevice and to set attributes of live.menu for routing channels to the below.\n  Parameter Visibility -> hidden\n  Initial Enable -> false\n');
+    return;
+  }
+  if ((typeof id !== 'number') || !isFinite(id)) {
+    error('Invalid argument for setchannel:', id, '\nMake sure to input from left outlet of live.menu (item index).');
+    return;
+  }
   var mapChannels = lomChannels.get('available_routing_channels');
   mapChannels = JSON.parse(mapChannels).available_routing_channels;
   if (mapChannels[id] != undefined) {
     lomRoutingChannel.set('routing_channel', mapChannels[id]);
   } else {
-    error('Invalid Input Channel:', id);
+    error('Invalid Routing Channel:', id, '\n');
   }
 }
 
@@ -165,9 +184,14 @@ function setchannel(id) {
  * @param {number} forceRouting 1: force to change routing, not 1: change routing when the input is selected to 'No Input'
  */
 function routethistrack(forceRouting) {
-  if (!isInitialized || jsarguments[1] != 'midi_inputs') return;
+  if (jsarguments[1] !== 'midi_inputs') return;
+  if (!isInitialized) {
+    error('Called routethistrack before init. Make sure to call init triggered by live.thisdevice.');
+    return;
+  }
   var routingType = JSON.parse(lomRoutingType.get('routing_type')).routing_type;
   var routingTypes = JSON.parse(lomTypes.get('available_routing_types')).available_routing_types;
+  // ignores if forceRouting attribute is not number. '1' (string) is acceptable.
   if (forceRouting != 1 && routingType.identifier != routingTypes[routingTypes.length - 1].identifier) return;
 
   lomThisTrack.goto('this_device');
