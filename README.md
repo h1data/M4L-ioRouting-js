@@ -36,6 +36,7 @@ number of channel pairs (zero-based counting)
 ## Notice
 - Each live.menu objects connected to js has to be set attributes below;
   - Parameter Visibility -> hidden
-  - Initial Enable -> false
+  - Initial Enable -> false<br>
+  It is not necessary to store live.menu values because the routing info is stored in M4L device itself.
 - This script use unofficial attributes for live.menu. The author does not own any responsibilities for using the script.
 - Undoing a series of changes for MIDI input type or channel may cause extra revert for pulldown lists. (issue [#1](https://github.com/h1data/M4L-ioRouting-js/issues/1))
